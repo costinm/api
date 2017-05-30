@@ -16,23 +16,18 @@ syntax = "proto3";
 
 package istio.mixer.v1;
 
-import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "mixer/v1/attributes.proto";
-
-option (gogoproto.goproto_getters_all) = false;
-option (gogoproto.equal_all) = false;
-option (gogoproto.gostring_all) = false;
 
 // Used to verify preconditions before performing an action.
 message CheckRequest {
   // The attributes to use for this request
-  Attributes attributes = 1 [(gogoproto.nullable) = false];
+  Attributes attributes = 1;
 }
 
 message CheckResponse {
   // The attributes to use for this response
-  Attributes attributes = 1 [(gogoproto.nullable) = false];
+  Attributes attributes = 1;
 
   // The amount of time for which this result can be considered valid, given the same inputs
   //
@@ -45,5 +40,5 @@ message CheckResponse {
   // can lead to changes in the result of Check. Determining this precise subset
   // of attributes is handled by the Istio configuration system, and made available
   // out-of-band to clients.
-  google.protobuf.Duration expiration = 2 [(gogoproto.nullable) = false, (gogoproto.stdduration) = true];
+  google.protobuf.Duration expiration = 2;
 }

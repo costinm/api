@@ -16,13 +16,8 @@ syntax = "proto3";
 
 package istio.mixer.v1;
 
-import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
-
-option (gogoproto.goproto_getters_all) = false;
-option (gogoproto.equal_all) = false;
-option (gogoproto.gostring_all) = false;
 
 // An instance of this message is delivered to Mixer with many
 // API call.
@@ -45,10 +40,10 @@ message Attributes {
   map<sint32, int64> int64s = 3;
   map<sint32, double> doubles = 4;
   map<sint32, bool> bools = 5;
-  map<sint32, google.protobuf.Timestamp> timestamps = 6 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
-  map<sint32, google.protobuf.Duration> durations = 7 [(gogoproto.nullable) = false, (gogoproto.stdduration) = true];
+  map<sint32, google.protobuf.Timestamp> timestamps = 6;
+  map<sint32, google.protobuf.Duration> durations = 7;
   map<sint32, bytes> bytes = 8;
-  map<sint32, StringMap> string_maps = 9 [(gogoproto.nullable) = false];
+  map<sint32, StringMap> string_maps = 9;
 }
 
 // A map of string to string. The keys and values in this map are dictionary

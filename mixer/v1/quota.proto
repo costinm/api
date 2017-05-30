@@ -16,17 +16,12 @@ syntax = "proto3";
 
 package istio.mixer.v1;
 
-import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "mixer/v1/attributes.proto";
 
-option (gogoproto.goproto_getters_all) = false;
-option (gogoproto.equal_all) = false;
-option (gogoproto.gostring_all) = false;
-
 message QuotaRequest {
   // The attributes to use for this request
-  Attributes attributes = 1 [(gogoproto.nullable) = false];
+  Attributes attributes = 1;
 
   // Used for deduplicating quota allocation/free calls in the case of
   // failed RPCs and retries. This should be a UUID per call, where the same
@@ -47,7 +42,7 @@ message QuotaRequest {
 
 message QuotaResponse {
   // The amount of time the returned quota can be considered valid, this is null or 0 for non-expiring quotas.
-  google.protobuf.Duration expiration = 1 [(gogoproto.nullable) = false, (gogoproto.stdduration) = true];
+  google.protobuf.Duration expiration = 1;
 
   // The total amount of quota returned, may be less than requested.
   int64 amount = 2;
