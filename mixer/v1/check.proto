@@ -16,14 +16,8 @@ syntax = "proto3";
 
 package istio.mixer.v1;
 
-import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
-import "google/rpc/status.proto";
 import "mixer/v1/attributes.proto";
-
-option (gogoproto.goproto_getters_all) = false;
-option (gogoproto.equal_all) = false;
-option (gogoproto.gostring_all) = false;
 
 // Used to get a thumbs-up/thumbs-down before performing an action.
 message CheckRequest {
@@ -40,7 +34,7 @@ message CheckRequest {
   //
   // Mixer's configuration determines how these attributes are used to
   // establish the result returned in the response.
-  Attributes attributes = 1 [(gogoproto.nullable) = false];
+  Attributes attributes = 1;
 
   // The number of words in the global dictionary, used with to populate the attributes.
   // This value is used as a quick way to determine whether the client is using a dictionary that
@@ -52,17 +46,17 @@ message CheckRequest {
   string deduplication_id = 3;
 
   // The individual quotas to allocate
-  map<string, QuotaParams> quotas = 4 [(gogoproto.nullable) = false];
+  map<string, QuotaParams> quotas = 4;
 }
 
 message CheckResponse {
   message PreconditionResult {
     // A status code of OK indicates all preconditions were satisfied. Any other code indicates not
     // all preconditions were satisfied and details describe why.
-    google.rpc.Status status = 1 [(gogoproto.nullable) = false];
+    google.rpc.Status status = 1;
 
     // The amount of time for which this result can be considered valid.
-    google.protobuf.Duration valid_duration = 2 [(gogoproto.nullable) = false, (gogoproto.stdduration) = true];
+    google.protobuf.Duration valid_duration = 2;
 
     // The number of uses for which this result can be considered valid.
     int32 valid_use_count = 3;
@@ -73,12 +67,12 @@ message CheckResponse {
     // adapters Mixer is configured with. These attributes are used to
     // ferry new attributes that Mixer derived based on the input set of
     // attributes and its configuration.
-    Attributes attributes = 4 [(gogoproto.nullable) = false];
+    Attributes attributes = 4;
   }
 
   message QuotaResult {
     // The amount of time for which this result can be considered valid.
-    google.protobuf.Duration valid_duration = 1 [(gogoproto.nullable) = false, (gogoproto.stdduration) = true];
+    google.protobuf.Duration valid_duration = 1;
 
     // The amount of granted quota. When `QuotaParams.best_effort` is true, this will be >= 0.
     // If `QuotaParams.best_effort` is false, this will be either 0 or >= `QuotaParams.amount`.
@@ -86,8 +80,5 @@ message CheckResponse {
   }
 
   // The precondition check results.
-  PreconditionResult precondition = 2 [(gogoproto.nullable) = false];
-
-  // The resulting quota, one entry per requested quota.
-  map<string, QuotaResult> quotas = 3 [(gogoproto.nullable) = false];
+  PreconditionResult precondition = 2;
 }
