@@ -18,6 +18,7 @@ package istio.mixer.v1;
 
 import "google/protobuf/duration.proto";
 import "mixer/v1/attributes.proto";
+import "google/rpc/status.proto";
 
 // Used to get a thumbs-up/thumbs-down before performing an action.
 message CheckRequest {
@@ -81,4 +82,5 @@ message CheckResponse {
 
   // The precondition check results.
   PreconditionResult precondition = 2;
+  map<string, QuotaResult> quotas = 3;
 }
