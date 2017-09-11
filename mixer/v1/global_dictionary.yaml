@@ -45,6 +45,9 @@
 - source.namespace
 - source.labels
 - source.user
+
+# target.* attributes have been renamed to destination.*
+# They cannot be removed from this append only dictionary.
 - target.ip
 - target.port
 - target.service
@@ -158,3 +161,60 @@
 - text/html; charset=utf-8
 - text/plain
 - text/plain; charset=utf-8
+
+# common strings
+- '0'
+- '1'
+- true
+- false
+- gzip, deflate
+- max-age=0
+- x-envoy-upstream-service-time
+- x-envoy-internal
+- x-envoy-expected-rq-timeout-ms
+- x-ot-span-context
+- x-b3-traceid
+- x-b3-sampled
+- x-b3-spanid
+- tcp
+
+# connection attributes
+- connection.id
+- connection.received.bytes
+- connection.received.bytes_total
+- connection.sent.bytes
+- connection.sent.bytes_total
+- connection.duration
+
+# context attributes
+- context.protocol
+- context.timestamp
+- context.time
+
+# common integer strings
+- 0
+- 1
+- 200
+- 302
+- 400
+- 401
+- 403
+- 404
+- 409
+- 429
+- 499
+- 500
+- 501
+- 502
+- 503
+- 504
+
+- destination.ip
+- destination.port
+- destination.service
+- destination.name
+- destination.uid
+- destination.namespace
+- destination.labels
+- destination.user
+
